@@ -8,6 +8,9 @@ const Posts = (props) => {
 
   return (
     <div className="posts-container-wrapper">
+      {posts.map ((object) => {
+         return < Post likePost = {likePost} post = {object} />     
+      })}
       {/* map through the posts here to return a Post component */}
       {/* Check the implementation of Post to see what props it requires! */}
     </div>

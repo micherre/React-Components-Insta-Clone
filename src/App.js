@@ -5,13 +5,17 @@ Look at each file to see what props need to be passed.
 */
 
 // Import the state hook
-import React from "react";
+import React, { useState } from "react";
+import Posts from "./components/Posts/Posts.js"
+import SearchBar from "./components/SearchBar/SearchBar.js"
 // Import the Posts (plural!) and SearchBar components, since they are used inside App component
+import Data from "./dummy-data"
 // Import the dummyData
 import "./App.css";
 
 const App = () => {
   // Create a state called 'posts' to hold the list of posts, initializing to dummyData.
+  const [ posts ] = useState(Data)
   // To make the search bar work (which is stretch) we'd need another state to hold the search term.
 
   const likePost = postId => {
@@ -21,10 +25,13 @@ const App = () => {
     // The callback passed into `posts.map()` performs the following logic:
     //  - if the `id` of the post matches `postId`, return a new post object containing an increased 'likes' count.
     //  - otherwise just return the post object unchanged.
+
   };
 
   return (
     <div className="App">
+      <SearchBar/>
+      <Posts likePost = {likePost} posts = {posts}/>
       {/* Add SearchBar and Posts here to render them */}
       {/* Check the implementation of each component, to see what props they require, if any! */}
     </div>

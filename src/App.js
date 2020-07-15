@@ -12,10 +12,10 @@ import SearchBar from "./components/SearchBar/SearchBar.js"
 import Data from "./dummy-data"
 // Import the dummyData
 import "./App.css";
-
+// must wrap all info in a module in a function
 const App = () => {
   // Create a state called 'posts' to hold the list of posts, initializing to dummyData.
-  const [ posts ] = useState(Data)
+  const [ posts, setPosts ] = useState(Data)
   // To make the search bar work (which is stretch) we'd need another state to hold the search term.
 
   const likePost = postId => {
@@ -25,12 +25,19 @@ const App = () => {
     // The callback passed into `posts.map()` performs the following logic:
     //  - if the `id` of the post matches `postId`, return a new post object containing an increased 'likes' count.
     //  - otherwise just return the post object unchanged.
-
+    setPosts( 
+    posts.map((postObj) => {
+        if (postObj.id === postId){
+        return {...postObj, likes: postObj.likes + 1}
+        }
+        else {return postObj}
+      }))
   };
-
+// SearchBar & Posts are the children modules of App
+// likePost == banana if banana is on Posts page  {likePost} is that item in the language of the parent
   return (
     <div className="App">
-      <SearchBar/>
+      <SearchBar/> 
       <Posts likePost = {likePost} posts = {posts}/>
       {/* Add SearchBar and Posts here to render them */}
       {/* Check the implementation of each component, to see what props they require, if any! */}
